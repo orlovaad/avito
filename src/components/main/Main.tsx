@@ -1,23 +1,20 @@
 import { Button } from 'antd';
-import getAmountNews from '../api/API';
+import { postList } from '../../App';
+import NewsList from '../news_list/NewsList';
 
 export interface MainProps {
-  setMaxId: (id: number) => void;
-  setNews: (news: any) => any;
-  setLoading: (loading: boolean) => void;
+  setNews: () => void;
   showLoading: boolean;
+  postList: postList;
 }
 
-function Main({ setMaxId, setNews, setLoading, showLoading }: MainProps) {
+function Main({ setNews, showLoading, postList }: MainProps) {
   return (
     <div>
-      <Button
-        type="primary"
-        loading={showLoading}
-        onClick={() => getAmountNews({ setMaxId, setNews, setLoading, showLoading })}
-      >
-        Click me!
+      <Button type="primary" loading={showLoading} onClick={() => setNews()}>
+        Refresh News!
       </Button>
+      <NewsList newsJson={postList}></NewsList>
     </div>
   );
 }
