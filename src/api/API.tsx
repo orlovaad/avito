@@ -1,4 +1,4 @@
-import { postItem, postList } from '../../App';
+import { postItem } from '../App';
 
 const DOMAIN_URL = 'https://hacker-news.firebaseio.com';
 const PATH_MAXID = '/v0/maxitem.json?print=pretty';
@@ -15,11 +15,3 @@ export const getPost = async (idPost: number): Promise<postItem> => {
   const response = await fetch(`${DOMAIN_URL}${PATH_START_NEWS}${idPost}${PATH_END_NEWS}`);
   return await response.json();
 };
-
-// получить пачку комментов самых свежих
-export function getAmountComments(
-  kidsComments: number[],
-  setComments: (post: any) => any,
-  setLoadingComments: (loading: boolean) => void,
-  comments: postList
-) {}

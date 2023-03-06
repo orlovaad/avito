@@ -7,11 +7,10 @@ export interface CommentsProps {
   storyId: number;
 }
 
-const dig = (comments: commentMap, postId: number) => {
+const commentsTree = (comments: commentMap, postId: number) => {
   const list: DataNode[] = [];
-  console.log(postId);
   const kids = comments[postId]?.kids;
-  console.log(kids);
+
   if (!kids) return list;
 
   for (let i = 0; i < kids.length; i++) {
@@ -21,7 +20,7 @@ const dig = (comments: commentMap, postId: number) => {
       key: comment.id,
     };
     if (comment.kids) {
-      treeNode.children = dig(comments, kids[i]);
+      treeNode.children = commentsTree(comments, kids[i]);
     }
     list.push(treeNode);
   }
@@ -29,13 +28,13 @@ const dig = (comments: commentMap, postId: number) => {
 };
 
 function Comments({ comments, storyId }: CommentsProps) {
-  console.log(comments);
-  const treeData = dig(comments, storyId);
+  const treeData = commentsTree(comments, storyId);
+  const commentsBlockHeight = 600;
 
   return (
     <div>
       Comments:
-      <Tree treeData={treeData} height={600} defaultExpandAll />
+      <Tree treeData={treeData} height={commentsBlockHeight} defaultExpandAll />
     </div>
   );
 }

@@ -21,9 +21,7 @@ const NewsList: React.FC<NewsListProps> = ({ newsJson }) => (
     itemLayout="vertical"
     size="large"
     pagination={{
-      onChange: (page) => {
-        console.log('json ', newsJson);
-      },
+      onChange: (page) => {},
       pageSize: 5,
     }}
     dataSource={newsJson}

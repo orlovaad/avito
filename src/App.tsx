@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Link } from 'react-router-dom';
-import { Route, UNSAFE_enhanceManualRouteObjects } from 'react-router';
+import { Route } from 'react-router';
 import Main from './components/main/Main';
 import Error404 from './components/error/Error404';
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { getMaxId, getPost } from './components/api/API';
+import { getMaxId, getPost } from './api/API';
 import NewsListItem from './components/news_list_item/NewsListItem';
 
 export type postList = Array<postItem>;
@@ -44,7 +44,6 @@ function App() {
       if (post && post.type === 'story' && !post.deleted && !post.dead) {
         postResult = { ...postResult, [i]: post };
         setPosts(postResult);
-        if (post.descendants) console.log(post);
       }
     }
 
@@ -57,7 +56,6 @@ function App() {
 
     return () => {
       clearInterval(interval);
-      console.warn('***************************_UNMOUNTED_APP_******************************');
     };
   }, []);
 

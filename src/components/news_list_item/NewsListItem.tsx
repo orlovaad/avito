@@ -5,7 +5,7 @@ import randomWords from 'random-words';
 import Comments from '../comments/Comments';
 import { Link, useParams } from 'react-router-dom';
 import { postItem, postList } from '../../App';
-import { getPost } from '../api/API';
+import { getPost } from '../../api/API';
 
 export type commentMap = {
   [id: number]: postItem;
@@ -27,11 +27,8 @@ const NewsListItem: React.FC<NewsListItemProps> = ({ newsJson, setPosts }) => {
   const [comments, setComments] = useState<commentMap>({});
   const [loadingComments, setLoadingComments] = useState(false);
   const [story, setStory] = useState<postItem>();
-
   const { id = '' } = useParams();
-  console.log('id = ', id);
   const item = newsJson.find((item) => item.id.toString() === id);
-  console.log(item);
 
   const fetchComments = async () => {
     setLoadingComments(true);
@@ -59,9 +56,6 @@ const NewsListItem: React.FC<NewsListItemProps> = ({ newsJson, setPosts }) => {
 
   useEffect(() => {
     fetchComments();
-    return () => {
-      console.warn('***************************_UNMOUNTED_APP_******************************');
-    };
   }, []);
   if (!story) return <Link to={`/error404`}>Error 404</Link>;
 
